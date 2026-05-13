@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LEXIS — EN↔AR Vocabulary</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="app">
+      <header>
+        <div class="logo">LEXIS<small>EN ↔ AR</small></div>
+        <nav>
+          <button class="active" onclick="show('add')">Add</button>
+          <button onclick="show('list')">Words</button>
+          <button onclick="show('flash')">Flash</button>
+        </nav>
+        <span class="badge" id="badge">0 words</span>
+      </header>
+
+      <main>
+        <!-- ADD -->
+        <div class="panel visible" id="panel-add">
+          <div class="stats-strip">
+            <div class="stat-box">
+              <div class="sv" id="s-total">0</div>
+              <div class="sl">Total Words</div>
+            </div>
+            <div class="stat-box">
+              <div class="sv" id="s-today">0</div>
+              <div class="sl">Added Today</div>
+            </div>
+            <div class="stat-box">
+              <div class="sv" id="s-last">—</div>
+              <div class="sl">Last Added</div>
+            </div>
+          </div>
+          <div class="add-grid">
+            <div>
+              <div class="sec-lbl">New Entry</div>
+              <div class="form-box">
+                <div class="field">
+                  <label>English Word</label
+                  ><input
+                    id="f-en"
+                    type="text"
+                    placeholder="e.g. ephemeral"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="field">
+                  <label>الكلمة العربية</label
+                  ><input
+                    id="f-ar"
+                    type="text"
+                    class="ar"
+                    placeholder="مثال: زائل"
+                    dir="rtl"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="field">
+                  <label>Example Sentence (English)</label
+                  ><input
+                    id="f-ex"
+                    type="text"
+                    placeholder="e.g. Beauty is ephemeral."
+                    autocomplete="off"
+                  />
+                </div>
+                <button class="save-btn" onclick="addWord()">SAVE WORD</button>
+                <div class="toast" id="toast">
+                  ✓ &nbsp; Word saved to your deck
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sec-lbl">Live Preview</div>
+              <div class="preview-box">
+                <div class="prev-tag">Flashcard Preview</div>
+                <div class="prev-en" id="pv-en">your word</div>
+                <div class="prev-ar" id="pv-ar">كلمتك</div>
+                <div class="prev-ex" id="pv-ex">
+                  example sentence appears here…
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="panel" id="panel-list">
+          <div class="list-bar">
+            <div class="srch-wrap">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search English or Arabic…"
+                oninput="renderList()"
+              />
+            </div>
+            <span class="cnt-pill" id="cnt">0 words</span>
+          </div>
+          <div class="word-grid" id="word-grid"></div>
+        </div>
+
+        <!-- FLASH -->
+        <div class="panel" id="panel-flash">
+          <div id="flash-root"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
