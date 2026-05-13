@@ -49,4 +49,9 @@ A lightweight browser-based flashcard app for learning English and Arabic vocabu
 
 ## Documentation
 
-For more details on app behavior and internal structure, see `docs/PROJECT_DOCUMENTATION.md`.
+For more details on app behavior and internal structure, see [docs/PROJECT_DOCUMENTATION.md](docs/PROJECT_DOCUMENTATION.md).
+
+## Quick start
+
+- Open `index.html` in a browser, or
+- Open `flashcard-app.html` directly.
