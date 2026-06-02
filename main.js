@@ -10,6 +10,26 @@ const save = (w) => localStorage.setItem(KEY, JSON.stringify(w));
 const esc = (s) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+/* SPEECH SYNTHESIS (TTS) */
+function speak(text, event) {
+  if (event) event.stopPropagation();
+  if (!text || text === "your word" || text === "example sentence appears here…") return;
+  
+  window.speechSynthesis.cancel();
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  
+  // Find a suitable English voice if loaded
+  const voices = window.speechSynthesis.getVoices();
+  const englishVoice = voices.find((v) => v.lang.startsWith("en-"));
+  if (englishVoice) {
+    utterance.voice = englishVoice;
+  }
+  
+  window.speechSynthesis.speak(utterance);
+}
+
 let deck = [],
   ci = 0,
   flipped = false;
@@ -120,7 +140,16 @@ function renderList() {
       (x) => `
     <div class="wcard">
       <button class="wc-del" onclick="delWord(${x.id})">✕</button>
-      <div class="wc-en">${esc(x.en)}</div>
+      <div class="wc-en-wrap">
+        <div class="wc-en">${esc(x.en)}</div>
+        <button class="speak-btn sm" onclick="speak(this.previousElementSibling.textContent, event)" title="Listen">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
+      </div>
       <div class="wc-ar">${esc(x.ar)}</div>
       ${x.ex ? `<div class="wc-ex">${esc(x.ex)}</div>` : ""}
     </div>`,
@@ -159,7 +188,16 @@ function renderFlash(r) {
           <div class="flipper" id="flipper">
             <div class="face face-f">
               <span class="ctag">English — tap to reveal</span>
-              <div class="c-en-w" id="c-en"></div>
+              <div class="c-en-wrap">
+                <div class="c-en-w" id="c-en"></div>
+                <button class="speak-btn" onclick="speak(deck[ci].en, event)" title="Listen">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                  </svg>
+                </button>
+              </div>
               <div class="c-en-ex" id="c-ex"></div>
             </div>
             <div class="face face-b">

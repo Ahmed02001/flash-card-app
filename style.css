@@ -934,3 +934,64 @@ main {
     padding: 1.5rem;
   }
 }
+
+/* ── SPEECH TEXT-TO-SPEECH (TTS) BUTTONS ── */
+.speak-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+.speak-btn:hover {
+  background: rgba(232, 197, 71, 0.08);
+  border-color: rgba(232, 197, 71, 0.4);
+  color: var(--accent);
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(232, 197, 71, 0.15);
+}
+.speak-btn:active {
+  transform: scale(0.95);
+}
+.speak-btn svg {
+  display: block;
+}
+
+/* Compact layout for list cards */
+.speak-btn.sm {
+  width: 26px;
+  height: 26px;
+}
+.speak-btn.sm svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Layout Wrappers */
+.prev-en-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.wc-en-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.25rem;
+}
+.c-en-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+  justify-content: center;
+}
+
